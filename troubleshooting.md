@@ -2,47 +2,41 @@
 
 ### API Server troubleshooting
 
+---
+
 **Logs**
 
 **Log locations:**
 
-`/var/log/pods` : pods logs
+- `/var/log/pods` : pods logs
 
-`/var/log/containers` : container logs
+- `/var/log/containers` : container logs
 
-`/var/log/syslog` : kubelet logs
+- `/var/log/syslog` : kubelet logs
 
 **Check logs**
 
-`cat /var/log/pods/kube-system_kube-apiserver` : if API server is created but pod has problem
+- `cat /var/log/pods/kube-system_kube-apiserver` : if API server is created but pod has problem
 
-`cat /var/log/syslog |grep apiserver` : If kubelet did not create api server
+- `cat /var/log/syslog |grep apiserver` : If kubelet did not create api server
 
 or
 
-`journalctl |grep apiserver`
-
-``
+- `journalctl |grep apiserver`
 
 **Trobleshooting API Server**
 
-- always make a backup !
-`cp /etc/kubernetes/manifests/kube-apiserver.yaml ~/kube-apiserver.yaml.ori`
+- `cp /etc/kubernetes/manifests/kube-apiserver.yaml ~/kube-apiserver.yaml.ori` : always make a backup !
 
-- make the change
-`vim /etc/kubernetes/manifests/kube-apiserver.yaml`
+- `vim /etc/kubernetes/manifests/kube-apiserver.yaml` : make the change
 
-- wait till container restarts
-`watch crictl ps`
+- `watch crictl ps` : wait till container restarts
 
-- check for apiserver pod
-`k get po -n kube-system `
+- `k get po -n kube-system` : check for apiserver pod
 
-- check pod logs
-`cat /var/log/pods/kube-system_kube-apiserver-controlplane_4e1eda320f6ceb861441aa1dcbc1ab1d/kube-apiserver/1.log`
+- `cat /var/log/pods/kube-system_kube-apiserver-controlplane_4e1eda320f6ceb861441aa1dcbc1ab1d/kube-apiserver/1.log` : check pod logs
 
-- restore the backup if needed
-`cp ~/kube-apiserver.yaml.ori /etc/kubernetes/manifests/kube-apiserver.yaml`
+- `cp ~/kube-apiserver.yaml.ori /etc/kubernetes/manifests/kube-apiserver.yaml` : restore the backup if needed
 
 
 **Tips**
@@ -54,3 +48,5 @@ or
 - `crictl logs`
 
 - `vim /etc/kubernetes/manifests/kube-apiserver.yaml` : edit apiserver manifest and debug accordingly, i.e check apiServer version, check flags, check addresses and ports
+
+---
