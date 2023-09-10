@@ -15,11 +15,23 @@ To get shorthand names `k api-resources`
   - `kubectl describe <resource-type> <resource-name>`: Show detailed information about a specific resource.
   - `kubectl delete <resource-type> <resource-name>`: Delete a resource.
 
-  **Pods:**
+---
+### Kubernetes Resources
+---
+**Pods:** (`po`)
   - `kubectl get pods`: List all pods in the current namespace.
   - `kubectl describe pod <pod-name>`: Show detailed information about a specific pod.
   - `kubectl logs <pod-name>`: View logs of a specific pod.
   - `kubectl exec -it <pod-name> -- <command>`: Execute a command in a running pod.
+  - `kubectl run <pod-name> --image=<image-name>` : Create a pod imperatively
+  - `kubectl create -f <pod-definition.yaml>`: Create a pod declarativly.
+
+**Replicasets:** (`rs`)
+  - `kubectl create -f <replicaset-definiton.yaml>`: Create a replicaset from manifest.
+  - `kubectl replace -f <replicaset-definition.yml>`: Update number of replicas in replicaset
+  - `kubectl scale –replicas=5 -f <replicaset-definition.yml>`: Update number of replicas in replicaset
+  - `kubectl delete replicaset <myapp-replicaset>`: Deletes replicaset and also all underlying pods
+  `kubectl edit replicaset <replicaset-name>`: Edit replicaset
 
 **Services:**
   - `kubectl get services`: List all services in the current namespace.
